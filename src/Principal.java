@@ -83,7 +83,7 @@ public class Principal {
 
         //Declara a matriz de adjacência do grafo g
         int[][] g = {
-            //1  2  3  4  5  6  7
+           //1  2  3  4  5  6  7
             {0, 1, 0, 1, 0, 0, 0},//1
             {0, 0, 1, 0, 0, 1, 0},//2
             {0, 0, 0, 0, 0, 1, 0},//3
@@ -257,7 +257,7 @@ public class Principal {
         return saida;
     }
 
-     /**
+    /**
      * Retorna a lista do grau (entrada/saída) dos vértices do Grafo.
      *
      * @param G Matriz do grafo.
@@ -272,13 +272,13 @@ public class Principal {
             int dgo = grauSaidaVertice(G, n, j);
             //Recupera o grau de entrada de j
             int dgi = grauEntradaVertice(G, n, j);
-            saida = saida + "do(" + trocar(j) + ")=" + dgo + " \t di(" + trocar(j) + ")=" + dgi +"\n";
+            saida = saida + "do(" + trocar(j) + ")=" + dgo + " \t di(" + trocar(j) + ")=" + dgi + "\n";
             conta = conta + dgo + dgi;
         }
         saida = saida + "Total = " + conta;
         return saida;
     }
-    
+
     /**
      * Retorna as adjacências de um vértice.
      *
@@ -314,6 +314,33 @@ public class Principal {
     }
 
     /**
+     * Verifica se o grafo é conexo.
+     *
+     * Se o grau entrada e saída de um vértice for igual a 0 
+     * nenhum vértice chega ou parte dele.
+     *
+     * @param G Matriz do grafo.
+     * @param n Quantidade de vértices do grafo.
+     * @return Se o grafo é conexo.
+     */
+    public static boolean eConexo(int[][] G, int n) {
+        //Assume que o grafo é conexo
+        boolean conexo = true;
+        int i = 0;
+        //Percorre todos os vértice e não encontrou nenhum vértice desconexo
+        while ((i < n) && (conexo == true)) {
+            //Verifica se o vértice i é de grau entrada igual a 0 
+            //Grau de saída igual 0
+            if ((grauEntradaVertice(G, n, i) == 0) && (grauSaidaVertice(G, n, i) == 0)) {
+                conexo = false;
+            }
+            //Avança para o próximo vértice
+            i = i + 1;
+        }
+        return conexo;
+    }
+
+    /**
      * Programa principal.
      *
      * @param args
@@ -338,6 +365,7 @@ public class Principal {
                     + " 10- Mostra a lista dos graus(saída/entrada) dos vértices\n"
                     + " 11- Mostra as adjacências de um vértice\n"
                     + " 12- Mostra a lista das adjacências dos vértices\n"
+                    + " 13- Verifica se o grafo é conexo\n"
                     //Outras opções vão aqui                    
                     + "99- Sair\n"
                     + "Digite a opção desejada:"));
@@ -447,6 +475,20 @@ public class Principal {
                 case 12: {
                     //Recupera os dados da matriz
                     String dados = "Lista das Adjacências:" + "\n" + listarAdjacencias(G, n);
+                    //Adiciona a String em um TextArea
+                    JTextArea saida = new JTextArea(dados);
+                    //Exibe o TextArea com showMessageDialog
+                    JOptionPane.showMessageDialog(null, saida);
+                    break;
+                }
+                case 13: {
+                    String dados = "O grafo ";
+                    //Recupera s dado da matriz
+                    if (eConexo(G, n) == true) {
+                        dados = dados + "é conexo";
+                    } else {
+                        dados = dados + "não é conexo";
+                    }
                     //Adiciona a String em um TextArea
                     JTextArea saida = new JTextArea(dados);
                     //Exibe o TextArea com showMessageDialog
