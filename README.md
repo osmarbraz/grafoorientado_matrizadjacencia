@@ -10,7 +10,10 @@ Operações diversas com grafos orientados em matriz de adjacência:<br>
 - Mostrar o grau de entrada de um vértice especifico<br>
 - Mostrar o grau de entrada de todos os vértices<br>
 - Mostrar o grau(saída/entrada) de todos os vértices<br>
+- Verificar se dois vértices são adjacentes<br>
 - Mostrar os vértices adjacentes de um vértice<br>
 - Mostrar os vértices adjacentes de todos os vértices<br>
+- Verificar se o grafo é simples<br>
 - Verificar se o grafo é conexo<br>
-
+- Verificar se o grafo é completo<br>
+- Verificar se o grafo é regular.
