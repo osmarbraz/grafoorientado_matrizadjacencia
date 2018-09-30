@@ -79,25 +79,25 @@ public class Principal {
      */
     public static void carregarGrafoPadrao() {
         //Declara a matriz de adjacência do grafo g
-        int[][] g = {
-            //1  2  3  4  5  6  7
-            {0, 1, 0, 1, 0, 0, 0},//1
-            {0, 0, 1, 0, 0, 1, 0},//2
-            {0, 0, 0, 0, 0, 1, 0},//3
-            {0, 1, 0, 0, 0, 0, 1},//4
-            {0, 0, 0, 0, 0, 1, 0},//5
-            {0, 0, 0, 0, 0, 0, 0},//6
-            {0, 0, 0, 0, 1, 0, 0} //7
-        };
 //        int[][] g = {
-//            //1  2  3 
-//            {0, 1, 1},//1
-//            {1, 0, 1},//2
-//            {1, 1, 0},//3
+//            //1  2  3  4  5  6  7
+//            {0, 1, 0, 1, 0, 0, 0},//1
+//            {0, 0, 1, 0, 0, 1, 0},//2
+//            {0, 0, 0, 0, 0, 1, 0},//3
+//            {0, 1, 0, 0, 0, 0, 1},//4
+//            {0, 0, 0, 0, 0, 1, 0},//5
+//            {0, 0, 0, 0, 0, 0, 0},//6
+//            {0, 0, 0, 0, 1, 0, 0} //7
 //        };
+        int[][] g = {
+            //1  2  3 
+            {0, 1, 1},//1
+            {1, 0, 1},//2
+            {1, 1, 0},//3
+        };
 
         //Número de vértices do grafo
-        n = 7;
+        n = 3;
 
         //Atribui para G
         G = g;
@@ -183,8 +183,7 @@ public class Principal {
         }
         return saida;
     }
-    
-    
+
     /**
      * Verifica se dois vértices são adjacentes.
      *
@@ -209,21 +208,6 @@ public class Principal {
         } else {
             return false;
         }
-    }
-    
-    /**
-     * Retorna a lista das adjacências de um vértice.
-     *
-     * @param G Matriz do grafo.
-     * @param n Quantidade de vértices do grafo.
-     * @return String com os adjacentes de um vértice.
-     */
-    public static String adjacentes(int[][] G, int n) {
-        String saida = "";
-        for (int i = 0; i < n; i++) {
-            saida = saida + adjacentes(G, n, i) + "\n";
-        }
-        return saida;
     }
 
     /**
@@ -435,25 +419,94 @@ public class Principal {
      * @param n Quantidade de vértices do grafo.
      * @return Se o grafo é regular.
      */
-    public static boolean eRegular(int[][] G, int n) {        
+    public static boolean eRegular(int[][] G, int n) {
         //Armazenar o grau de cada vértice    
         int[] graus = new int[n];
         //Soma o grau de entrada e saída de cada vértice        
         for (int i = 0; i < n; i++) {
             graus[i] = 0;
             for (int j = 0; j < n; j++) {
-                graus[i] = graus[i] + G[i][j];                
+                graus[i] = graus[i] + G[i][j];
             }
-        }        
+        }
         //Verifica a soma dos graus
         //Desconta 1 no tamanho
-        for (int i = 0; i < n-1; i++) {
+        for (int i = 0; i < n - 1; i++) {
             //Verifica se o grau do vértice graus[i] é diferente a graus[i+1]            
             if (graus[i] != graus[i + 1]) {
                 return false;
             }
         }
         //Todos os graus são iguais
+        return true;
+    }
+
+    /**
+     * Verifica se o grafo possui caminho euleriano.
+     *
+     * Um caminho Euleriano não repete arestas, mas não precisam terminar no
+     * mesmo vértice. Pode existir
+     *
+     * @param G Matriz do grafo.
+     * @param n Quantidade de vértices do grafo.
+     * @return Se o grafo possui caminho euleriano.
+     */
+    public static boolean possuiCaminhoEuleriano(int[][] G, int n) {
+        //Registra a quantidade de vértices com grau impar
+        int verticeGrauImpar = 0;
+        for (int i = 0; i < n; i++) {
+            int grau = 0;
+            for (int j = 0; j < n; j++) {
+                //Conta o grau do vértice i
+                if (G[i][j] == 1) {
+                    grau = grau + 1;
+                }
+            }
+            //Se o grau do vértice i for impar conta
+            if ((grau % 2) == 1) {
+                //Conta as quantidade de vértices com grau impar
+                verticeGrauImpar = verticeGrauImpar + 1;
+            }
+        }
+        if (verticeGrauImpar > 2) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Verifica se o grafo possui ciclo euleriano.
+     *
+     * Um grafo euleriano deve possuir um ciclo que inclua todas as arestas do
+     * grafo. Para um grafo ser Euleriano todos os vértices precisam ser de grau
+     * par. O caminho começa e termina no mesmo vértice.
+     *
+     * @param G Matriz do grafo.
+     * @param n Quantidade de vértices do grafo.
+     * @return Se o grafo é euleriano.
+     */
+    public static boolean possuiCicloEuleriano(int[][] G, int n) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                //Verifica se o vértice i possui aresta paralela(>1) ou laço(i,i) > 0
+                //Se existir é um grafo euleriano
+                if (G[i][j] > 1 || G[i][i] > 0) {
+                    return false;
+                }
+            }
+        }
+        //Conta o grau do vértice i
+        for (int i = 0; i < n; i++) {
+            int grau = 0;
+            for (int j = 0; j < n; j++) {
+                grau = grau + G[i][j];
+            }
+            //Se o grau for impar não é euleriano
+            if (grau % 2 != 0) {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -471,22 +524,24 @@ public class Principal {
             opcao = Integer.parseInt(JOptionPane.showInputDialog("\t### Menu de Opções - Grafo Orientado com Matriz de Adjacência ###\n"
                     + " 0- Carregamento da Grafo\n"
                     + " 1- Imprime Matriz Adjacência\n"
-                    + " 2- Leitura do Grafo\n"                    
+                    + " 2- Leitura do Grafo\n"
                     + " 3- Mostra a lista dos vértices\n"
                     + " 4- Mostra a lista das arestas\n"
-                    + " 5- Mostra a lista das arestas em pares\n"                    
+                    + " 5- Mostra a lista das arestas em pares\n"
                     + " 6- Mostra o grau de saída um vértice\n"
                     + " 7- Mostra a lista dos graus de saída dos vértices\n"
                     + " 8- Mostra o grau de entrada um vértice\n"
-                    + " 9- Mostra a lista dos graus de entrada dos vértices\n"                    
-                    + "10- Mostra a lista dos graus(saída/entrada) dos vértices\n"                    
-                    + "11- Verifica se dois vértices são adjacentes\n"                    
+                    + " 9- Mostra a lista dos graus de entrada dos vértices\n"
+                    + "10- Mostra a lista dos graus(saída/entrada) dos vértices\n"
+                    + "11- Verifica se dois vértices são adjacentes\n"
                     + "12- Mostra as adjacências de um vértice\n"
                     + "13- Mostra a lista das adjacências dos vértices\n"
                     + "14- Verifica se o grafo é simples\n"
                     + "15- Verifica se o grafo é conexo\n"
                     + "16- Verifica se o grafo é completo\n"
                     + "17- Verifica se o grafo é regular\n"
+                    + "18- Verifica se o grafo possui ciclo euleriano\n"
+                    + "18- Verifica se o grafo possui caminho euleriano\n"
                     //Outras opções vão aqui                    
                     + "99- Sair\n"
                     + "Digite a opção desejada:"));
@@ -537,7 +592,7 @@ public class Principal {
                     break;
                 }
                 case 6: {
-                    int i = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n-1) + ") de um vértice para saber o grau de saída (do):"));
+                    int i = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n - 1) + ") de um vértice para saber o grau de saída (do):"));
                     //Recupera os dados da matriz
                     String dados = "Grau de Saída dos Vértice : \n" + "d(" + trocar(i) + ")=" + grauSaidaVertice(G, n, i);
                     //Adiciona a String em um TextArea
@@ -556,7 +611,7 @@ public class Principal {
                     break;
                 }
                 case 8: {
-                    int j = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n-1) + ") de um vértice para saber o grau de entrada (di):"));
+                    int j = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n - 1) + ") de um vértice para saber o grau de entrada (di):"));
                     //Recupera os dados da matriz
                     String dados = "Grau de Entrada dos Vértice : \n" + "d(" + trocar(j) + ")=" + grauEntradaVertice(G, n, j);
                     //Adiciona a String em um TextArea
@@ -582,10 +637,10 @@ public class Principal {
                     //Exibe o TextArea com showMessageDialog
                     JOptionPane.showMessageDialog(null, saida);
                     break;
-                }                
+                }
                 case 11: {
-                    int i = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n-1) + ") do primeiro vértice:"));
-                    int j = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n-1) + ") do segundo vértice:"));
+                    int i = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n - 1) + ") do primeiro vértice:"));
+                    int j = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n - 1) + ") do segundo vértice:"));
                     String dados = "Os vértices " + trocar(i) + " e " + trocar(j);
                     //Recupera os dados da matriz
                     if (verificaAdjacencia(G, n, i, j) == true) {
@@ -598,11 +653,11 @@ public class Principal {
                     //Exibe o TextArea com showMessageDialog
                     JOptionPane.showMessageDialog(null, saida);
                     break;
-                }                
+                }
                 case 12: {
-                    int i = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n-1) + ") de um vértice para saber as adjacências:"));
+                    int i = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n - 1) + ") de um vértice para saber as adjacências:"));
                     //Recupera os dados da matriz
-                    String dados = "Os adjacentes de " +trocar(i) + " são: " + adjacentes(G, n, i);
+                    String dados = "Os adjacentes de " + trocar(i) + " são: " + adjacentes(G, n, i);
                     //Adiciona a String em um TextArea
                     JTextArea saida = new JTextArea(dados);
                     //Exibe o TextArea com showMessageDialog
@@ -667,6 +722,34 @@ public class Principal {
                         dados = dados + "é regular";
                     } else {
                         dados = dados + "não é regular";
+                    }
+                    //Adiciona a String em um TextArea
+                    JTextArea saida = new JTextArea(dados);
+                    //Exibe o TextArea com showMessageDialog
+                    JOptionPane.showMessageDialog(null, saida);
+                    break;
+                }
+                case 18: {
+                    String dados = "O grafo ";
+                    //Recupera s dado da matriz
+                    if (possuiCicloEuleriano(G, n) == true) {
+                        dados = dados + "possui ciclo euleriano";
+                    } else {
+                        dados = dados + "não possui ciclo euleriano";
+                    }
+                    //Adiciona a String em um TextArea
+                    JTextArea saida = new JTextArea(dados);
+                    //Exibe o TextArea com showMessageDialog
+                    JOptionPane.showMessageDialog(null, saida);
+                    break;
+                }
+                case 19: {
+                    String dados = "O grafo ";
+                    //Recupera s dado da matriz
+                    if (possuiCaminhoEuleriano(G, n) == true) {
+                        dados = dados + " poussi caminho euleriano";
+                    } else {
+                        dados = dados + " não possui caminho euleriano";
                     }
                     //Adiciona a String em um TextArea
                     JTextArea saida = new JTextArea(dados);
