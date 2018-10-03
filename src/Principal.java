@@ -80,7 +80,7 @@ public class Principal {
     public static void carregarGrafoPadrao() {
         //Declara a matriz de adjacência do grafo g
         int[][] g = {
-            //1  2  3  4  5  6  7
+           //1  2  3  4  5  6  7
             {0, 1, 0, 1, 0, 0, 0},//1
             {0, 0, 1, 0, 0, 1, 0},//2
             {0, 0, 0, 0, 0, 1, 0},//3
@@ -332,6 +332,44 @@ public class Principal {
     }
 
     /**
+     * Retorna os vértices sucessores de um vértice.
+     *
+     * @param G Matriz do grafo.
+     * @param n Quantidade de vértices do grafo.
+     * @param i Vértice do grafo.
+     * @return String com os vértices sucessores de i.
+     */
+    public static String sucessores(int[][] G, int n, int i) {
+        String saida = trocar(i) + "->";
+        for (int j = 0; j < n; j++) {
+            //Verifica se existe um vértice adjacente para i em j que seja sucessor
+            if (G[i][j] == 1) {
+                saida = saida + trocar(j) + ",";
+            }
+        }
+        return saida;
+    }
+
+    /**
+     * Retorna os vértices antcessores de um vértice.
+     *
+     * @param G Matriz do grafo.
+     * @param n Quantidade de vértices do grafo.
+     * @param i Vértice do grafo.
+     * @return String com os vértices sucessores de i.
+     */
+    public static String antecessores(int[][] G, int n, int i) {
+        String saida = trocar(i) + "->";
+        for (int j = 0; j < n; j++) {
+            //Verifica se existe um vértice adjacente para i em j que seja antesucessor
+            if (G[j][i] == 1) {
+                saida = saida + trocar(j) + ",";
+            }
+        }
+        return saida;
+    }
+
+    /**
      * Retorna a lista dos vértices adjacentes do Grafo.
      *
      * @param G Matriz do grafo.
@@ -536,12 +574,14 @@ public class Principal {
                     + "11- Verifica se dois vértices são adjacentes\n"
                     + "12- Mostra as adjacências de um vértice\n"
                     + "13- Mostra a lista das adjacências dos vértices\n"
-                    + "14- Verifica se o grafo é simples\n"
-                    + "15- Verifica se o grafo é conexo\n"
-                    + "16- Verifica se o grafo é completo\n"
-                    + "17- Verifica se o grafo é regular\n"
-                    + "18- Verifica se o grafo possui ciclo euleriano\n"
-                    + "18- Verifica se o grafo possui caminho euleriano\n"
+                    + "14- Mostra a lista de sucessores de um vértice\n"
+                    + "15- Mostra a lista de antecessores de um vértice\n"
+                    + "16- Verifica se o grafo é simples\n"
+                    + "17- Verifica se o grafo é conexo\n"
+                    + "18- Verifica se o grafo é completo\n"
+                    + "19- Verifica se o grafo é regular\n"
+                    + "20- Verifica se o grafo possui ciclo Euleriano\n"
+                    + "21- Verifica se o grafo possui caminho Euleriano\n"
                     //Outras opções vão aqui                    
                     + "99- Sair\n"
                     + "Digite a opção desejada:"));
@@ -674,6 +714,26 @@ public class Principal {
                     break;
                 }
                 case 14: {
+                    int i = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n - 1) + ") de um vértice para saber os sucessores:"));
+                    //Recupera os dados da matriz
+                    String dados = "Os sucessores de " + trocar(i) + " são: " + sucessores(G, n, i);
+                    //Adiciona a String em um TextArea
+                    JTextArea saida = new JTextArea(dados);
+                    //Exibe o TextArea com showMessageDialog
+                    JOptionPane.showMessageDialog(null, saida);
+                    break;
+                }
+                case 15: {
+                    int i = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n - 1) + ") de um vértice para saber os antecessores:"));
+                    //Recupera os dados da matriz
+                    String dados = "Os antecessores de " + trocar(i) + " são: " + antecessores(G, n, i);
+                    //Adiciona a String em um TextArea
+                    JTextArea saida = new JTextArea(dados);
+                    //Exibe o TextArea com showMessageDialog
+                    JOptionPane.showMessageDialog(null, saida);
+                    break;
+                }
+                case 16: {
                     String dados = "O grafo ";
                     //Recupera s dado da matriz
                     if (eSimples(G, n) == true) {
@@ -687,7 +747,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 15: {
+                case 17: {
                     String dados = "O grafo ";
                     //Recupera s dado da matriz
                     if (eConexo(G, n) == true) {
@@ -701,7 +761,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 16: {
+                case 18: {
                     String dados = "O grafo ";
                     //Recupera s dado da matriz
                     if (eCompleto(G, n) == true) {
@@ -715,7 +775,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 17: {
+                case 19: {
                     String dados = "O grafo ";
                     //Recupera s dado da matriz
                     if (eRegular(G, n) == true) {
@@ -729,7 +789,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 18: {
+                case 20: {
                     String dados = "O grafo ";
                     //Recupera s dado da matriz
                     if (possuiCicloEuleriano(G, n) == true) {
@@ -743,7 +803,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 19: {
+                case 21: {
                     String dados = "O grafo ";
                     //Recupera s dado da matriz
                     if (possuiCaminhoEuleriano(G, n) == true) {
