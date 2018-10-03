@@ -13,6 +13,8 @@ Operações diversas com grafos orientados em matriz de adjacência:<br>
 - Verificar se dois vértices são adjacentes<br>
 - Mostrar os vértices adjacentes de um vértice<br>
 - Mostrar os vértices adjacentes de todos os vértices<br>
+- Mostrar os vértices sucessores de um vértice<br>
+- Mostrar os vértices antecessores de um vértice<br>
 - Verificar se o grafo é simples<br>
 - Verificar se o grafo é conexo<br>
 - Verificar se o grafo é completo<br>
