@@ -14,35 +14,37 @@ public class Principal {
     static int[][] G = new int[n][n];
 
     /**
-     * Troca um número que representa a posição pela vértice do grafo.
+     * Troca um número pelo rótulo do vértice no grafo.
+     * 
+     * Retorna o rótulo da posição i do vértice no grafo.
      *
-     * @param i Posição da letra
-     * @return Uma String com a letra da posição
+     * @param i Posição do vértice no grafo
+     * @return Um rótulo para a posição i
      */
-    public static String trocar(int i) {
-        String letras = "abcdefghijklmnopqrstuvwxyz";
-        if ((i >= 0) && (i <= letras.length())) {
-            return letras.charAt(i) + "";
+    public static String rotuloVertice(int i) {        
+        String [] rotulos = {"a1", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+        if ((i >= 0) && (i <= rotulos.length)) {
+            return (rotulos[i] + "");
         } else {
             return "-";
         }
     }
 
     /**
-     * Troca a letra pela posição na matriz de adjacência.
+     * Troca o rótulo pela posição do vértice no grafo.
      *
-     * @param v Letra a ser troca pela posição
-     * @return Um inteiro com a posição da letra no grafo
+     * @param chave Rótulo a ser trocado pela posição do vértice no grafo.
+     * @return Um inteiro que representa a posição do vértice no grafo
      */
-    public static int destrocar(char v) {
-        String letras = "abcdefghijklmnopqrstuvwxyz";
+    public static int indiceRotuloVertice(String chave) {        
+        String [] rotulos = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
         int pos = -1;
-        for (int i = 0; i < letras.length(); i++) {
-            if (letras.charAt(i) == v) {
-                pos = i;
+        for (int i = 0; i < rotulos.length; i++) {
+            if (rotulos[i].equals(chave)) {
+                return i;
             }
         }
-        return pos;
+        return -1;
     }
 
     /**
@@ -57,7 +59,7 @@ public class Principal {
         if (linhas != 0 || colunas != 0) {
             String saida = "";
             for (int j = 0; j < colunas; j++) {
-                saida = saida + "\t" + trocar(j);
+                saida = saida + "\t" + rotuloVertice(j);
             }
             saida = "n/m" + saida + "\n";
             for (int i = 0; i < linhas; i++) {
@@ -65,7 +67,7 @@ public class Principal {
                 for (int j = 0; j < colunas; j++) {
                     dados = dados + "\t" + String.format("%2d", M[i][j]);
                 }
-                saida = saida + trocar(i) + dados + "\n";
+                saida = saida + rotuloVertice(i) + dados + "\n";
             }
             return saida;
         } else {
@@ -113,12 +115,12 @@ public class Principal {
         //Instância a matriz de adjacência com o novo tamanho.
         G = new int[n][n];
         for (int i = 0; i < n; i++) {
-            int j = Integer.parseInt(JOptionPane.showInputDialog("Preenchendo os adjacentes de(" + trocar(i) + ")"
+            int j = Integer.parseInt(JOptionPane.showInputDialog("Preenchendo os adjacentes de(" + rotuloVertice(i) + ")"
                     + "\nDigite o indice(0-" + n + ") do vértice de incidência de " + i
                     + "\n ou -1 para ir ao próximo vértice:"));
             while (j != -1) {
                 G[i][j] = 1;
-                j = Integer.parseInt(JOptionPane.showInputDialog("Preenchendo os adjacentes de(" + trocar(i) + ")"
+                j = Integer.parseInt(JOptionPane.showInputDialog("Preenchendo os adjacentes de(" + rotuloVertice(i) + ")"
                         + "\nDigite o índice(0-" + n + ") do vértice de incidência de " + i
                         + "\n ou -1 para ir ao próximo vértice:"));
             }
@@ -135,7 +137,7 @@ public class Principal {
     public static String listarVertices(int[][] G, int n) {
         String saida = "";
         for (int i = 0; i < n; i++) {
-            saida = saida + trocar(i) + ",";
+            saida = saida + rotuloVertice(i) + ",";
         }
         return saida;
     }
@@ -176,7 +178,7 @@ public class Principal {
             for (int j = 0; j < n; j++) {
                 //Verifica se existe par para i e j
                 if (G[i][j] == 1) {
-                    saida = saida + "e" + conta + "=(" + trocar(i) + "," + trocar(j) + ") \n";
+                    saida = saida + "e" + conta + "=(" + rotuloVertice(i) + "," + rotuloVertice(j) + ") \n";
                     conta = conta + 1;
                 }
             }
@@ -243,7 +245,7 @@ public class Principal {
         for (int i = 0; i < n; i++) {
             //Recupera o grau de saida do vértice i
             int dgo = grauSaidaVertice(G, n, i);
-            saida = saida + "do(" + trocar(i) + ")=" + dgo + "\n";
+            saida = saida + "do(" + rotuloVertice(i) + ")=" + dgo + "\n";
             conta = conta + dgo;
         }
         saida = saida + "Total Saída = " + conta;
@@ -283,7 +285,7 @@ public class Principal {
         for (int j = 0; j < n; j++) {
             //Recupera o grau de entrada do vertice j
             int dgi = grauEntradaVertice(G, n, j);
-            saida = saida + "di(" + trocar(j) + ")=" + dgi + "\n";
+            saida = saida + "di(" + rotuloVertice(j) + ")=" + dgi + "\n";
             conta = conta + dgi;
         }
         saida = saida + "Total Entrada = " + conta;
@@ -305,7 +307,7 @@ public class Principal {
             int dgo = grauSaidaVertice(G, n, j);
             //Recupera o grau de entrada de j
             int dgi = grauEntradaVertice(G, n, j);
-            saida = saida + "do(" + trocar(j) + ")=" + dgo + " \t di(" + trocar(j) + ")=" + dgi + "\n";
+            saida = saida + "do(" + rotuloVertice(j) + ")=" + dgo + " \t di(" + rotuloVertice(j) + ")=" + dgi + "\n";
             conta = conta + dgo + dgi;
         }
         saida = saida + "Total = " + conta;
@@ -321,11 +323,11 @@ public class Principal {
      * @return String com as adjacentes de i.
      */
     public static String adjacentes(int[][] G, int n, int i) {
-        String saida = trocar(i) + "->";
+        String saida = rotuloVertice(i) + "->";
         for (int j = 0; j < n; j++) {
             //Verifica se existe um vértice adjacente para i em j
             if (G[i][j] == 1) {
-                saida = saida + trocar(j) + ",";
+                saida = saida + rotuloVertice(j) + ",";
             }
         }
         return saida;
@@ -340,11 +342,11 @@ public class Principal {
      * @return String com os vértices sucessores de i.
      */
     public static String sucessores(int[][] G, int n, int i) {
-        String saida = trocar(i) + "->";
+        String saida = rotuloVertice(i) + "->";
         for (int j = 0; j < n; j++) {
             //Verifica se existe um vértice adjacente para i em j que seja sucessor
             if (G[i][j] == 1) {
-                saida = saida + trocar(j) + ",";
+                saida = saida + rotuloVertice(j) + ",";
             }
         }
         return saida;
@@ -359,11 +361,11 @@ public class Principal {
      * @return String com os vértices sucessores de i.
      */
     public static String antecessores(int[][] G, int n, int i) {
-        String saida = trocar(i) + "->";
+        String saida = rotuloVertice(i) + "->";
         for (int j = 0; j < n; j++) {
             //Verifica se existe um vértice adjacente para i em j que seja antesucessor
             if (G[j][i] == 1) {
-                saida = saida + trocar(j) + ",";
+                saida = saida + rotuloVertice(j) + ",";
             }
         }
         return saida;
@@ -562,7 +564,7 @@ public class Principal {
             opcao = Integer.parseInt(JOptionPane.showInputDialog("\t### Menu de Opções - Grafo Orientado com Matriz de Adjacência ###\n"
                     + " 0- Carregamento da Grafo\n"
                     + " 1- Imprime Matriz Adjacência\n"
-                    + " 2- Leitura do Grafo\n"
+                    + " 2- Leitura do Grafo(i)\n"
                     + " 3- Mostra a lista dos vértices\n"
                     + " 4- Mostra a lista das arestas\n"
                     + " 5- Mostra a lista das arestas em pares\n"
@@ -634,7 +636,7 @@ public class Principal {
                 case 6: {
                     int i = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n - 1) + ") de um vértice para saber o grau de saída (do):"));
                     //Recupera os dados da matriz
-                    String dados = "Grau de Saída dos Vértice : \n" + "d(" + trocar(i) + ")=" + grauSaidaVertice(G, n, i);
+                    String dados = "Grau de Saída dos Vértice : \n" + "d(" + rotuloVertice(i) + ")=" + grauSaidaVertice(G, n, i);
                     //Adiciona a String em um TextArea
                     JTextArea saida = new JTextArea(dados);
                     //Exibe o TextArea com showMessageDialog
@@ -653,7 +655,7 @@ public class Principal {
                 case 8: {
                     int j = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n - 1) + ") de um vértice para saber o grau de entrada (di):"));
                     //Recupera os dados da matriz
-                    String dados = "Grau de Entrada dos Vértice : \n" + "d(" + trocar(j) + ")=" + grauEntradaVertice(G, n, j);
+                    String dados = "Grau de Entrada dos Vértice : \n" + "d(" + rotuloVertice(j) + ")=" + grauEntradaVertice(G, n, j);
                     //Adiciona a String em um TextArea
                     JTextArea saida = new JTextArea(dados);
                     //Exibe o TextArea com showMessageDialog
@@ -681,7 +683,7 @@ public class Principal {
                 case 11: {
                     int i = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n - 1) + ") do primeiro vértice:"));
                     int j = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n - 1) + ") do segundo vértice:"));
-                    String dados = "Os vértices " + trocar(i) + " e " + trocar(j);
+                    String dados = "Os vértices " + rotuloVertice(i) + " e " + rotuloVertice(j);
                     //Recupera os dados da matriz
                     if (verificaAdjacencia(G, n, i, j) == true) {
                         dados = dados + " são adjacentes";
@@ -697,7 +699,7 @@ public class Principal {
                 case 12: {
                     int i = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n - 1) + ") de um vértice para saber as adjacências:"));
                     //Recupera os dados da matriz
-                    String dados = "Os adjacentes de " + trocar(i) + " são: " + adjacentes(G, n, i);
+                    String dados = "Os adjacentes de " + rotuloVertice(i) + " são: " + adjacentes(G, n, i);
                     //Adiciona a String em um TextArea
                     JTextArea saida = new JTextArea(dados);
                     //Exibe o TextArea com showMessageDialog
@@ -716,7 +718,7 @@ public class Principal {
                 case 14: {
                     int i = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n - 1) + ") de um vértice para saber os sucessores:"));
                     //Recupera os dados da matriz
-                    String dados = "Os sucessores de " + trocar(i) + " são: " + sucessores(G, n, i);
+                    String dados = "Os sucessores de " + rotuloVertice(i) + " são: " + sucessores(G, n, i);
                     //Adiciona a String em um TextArea
                     JTextArea saida = new JTextArea(dados);
                     //Exibe o TextArea com showMessageDialog
@@ -726,7 +728,7 @@ public class Principal {
                 case 15: {
                     int i = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n - 1) + ") de um vértice para saber os antecessores:"));
                     //Recupera os dados da matriz
-                    String dados = "Os antecessores de " + trocar(i) + " são: " + antecessores(G, n, i);
+                    String dados = "Os antecessores de " + rotuloVertice(i) + " são: " + antecessores(G, n, i);
                     //Adiciona a String em um TextArea
                     JTextArea saida = new JTextArea(dados);
                     //Exibe o TextArea com showMessageDialog
