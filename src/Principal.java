@@ -107,6 +107,33 @@ public class Principal {
     }
 
     /**
+     * Verifica se existe a aresta no Grafo.
+     * @param G Grafo a ser verifica a aresta.
+     * @param i Vértice adjacente i da aresta.
+     * @param j Vértice adjacente j da aresta.
+     * @return Se existe a aresta;
+     */
+    public static boolean existeAresta(int[][] G, int i, int j){
+        if (G[i][j]==1){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    /**
+     * Incluir um areta para o Grafo.
+     * 
+     * @param G Gravo a ser inserido a aresta.
+     * @param i Vértice adjacente.
+     * @param j Vértice adjacente.
+     */
+    public static void incluirAresta(int[][] G, int i, int j){
+        //1 valor para a aresta que possui o vértice i e j como adjacentes.
+         G[i][j] = 1;
+    }
+    
+    /**
      * Realiza a leitura dos dados do Grafo G.
      */
     public static void leituraGrafo() {
@@ -119,7 +146,7 @@ public class Principal {
                     + "\nDigite o indice(0-" + n + ") do vértice de incidência de " + i
                     + "\n ou -1 para ir ao próximo vértice:"));
             while (j != -1) {
-                G[i][j] = 1;
+               incluirAresta(G,i,j);
                 j = Integer.parseInt(JOptionPane.showInputDialog("Preenchendo os adjacentes de(" + rotuloVertice(i) + ")"
                         + "\nDigite o índice(0-" + n + ") do vértice de incidência de " + i
                         + "\n ou -1 para ir ao próximo vértice:"));
