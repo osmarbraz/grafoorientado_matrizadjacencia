@@ -82,7 +82,7 @@ public class Principal {
     public static void carregarGrafoPadrao() {
         //Declara a matriz de adjacência do grafo g
         int[][] g = {
-           //1  2  3  4  5  6  7
+            //1  2  3  4  5  6  7
             {0, 1, 0, 1, 0, 0, 0},//1
             {0, 0, 1, 0, 0, 1, 0},//2
             {0, 0, 0, 0, 0, 1, 0},//3
@@ -98,7 +98,6 @@ public class Principal {
 //            {1, 0, 1},//2
 //            {1, 1, 0},//3
 //        };
-
         //Número de vértices do grafo
         n = 7;
 
@@ -516,7 +515,7 @@ public class Principal {
                 diagonal0 = false;
             }
         }
-        
+
         boolean acima1 = true;
         //Verifica se fora da diagonal principal existes arestas simples(1)
         for (int i = 0; i < n; i++) {
@@ -694,26 +693,28 @@ public class Principal {
                     + " 0- Carregamento da Grafo\n"
                     + " 1- Imprime Matriz Adjacência\n"
                     + " 2- Leitura do Grafo(i)\n"
-                    + " 3- Mostra a lista dos vértices\n"
-                    + " 4- Mostra a lista das arestas\n"
-                    + " 5- Mostra a lista das arestas em pares\n"
-                    + " 6- Mostra o grau de saída um vértice\n"
-                    + " 7- Mostra a lista dos graus de saída dos vértices\n"
-                    + " 8- Mostra o grau de entrada um vértice\n"
-                    + " 9- Mostra a lista dos graus de entrada dos vértices\n"
-                    + "10- Mostra a lista dos graus(saída/entrada) dos vértices\n"
-                    + "11- Verifica se dois vértices são adjacentes\n"
-                    + "12- Mostra as adjacências de um vértice\n"
-                    + "13- Mostra a lista das adjacências dos vértices\n"
-                    + "14- Mostra a lista de sucessores de um vértice\n"
-                    + "15- Mostra a lista de antecessores de um vértice\n"
-                    + "16- Verifica se o grafo é simples\n"
-                    + "17- Verifica se o grafo é conexo\n"
-                    + "18- Verifica se o grafo é completo\n"
-                    + "19- Verifica se o grafo é regular\n"
-                    + "20- Verifica se o grafo possui ciclo Euleriano\n"
-                    + "21- Verifica se o grafo possui caminho Euleriano\n"
-                    + "22- Converte para Matriz de Incidência\n"
+                    + " 3- Mostra a quantidade de vértices do Grafo\n"
+                    + " 4- Mostra a quantidade de vértices do Grafo\n"
+                    + " 5- Mostra a lista dos vértices\n"
+                    + " 6- Mostra a lista das arestas\n"
+                    + " 7- Mostra a lista das arestas em pares\n"
+                    + " 8- Mostra o grau de saída um vértice\n"
+                    + " 9- Mostra a lista dos graus de saída dos vértices\n"
+                    + "10- Mostra o grau de entrada um vértice\n"
+                    + "11- Mostra a lista dos graus de entrada dos vértices\n"
+                    + "12- Mostra a lista dos graus(saída/entrada) dos vértices\n"
+                    + "13- Verifica se dois vértices são adjacentes\n"
+                    + "14- Mostra as adjacências de um vértice\n"
+                    + "15- Mostra a lista das adjacências dos vértices\n"
+                    + "16- Mostra a lista de sucessores de um vértice\n"
+                    + "17- Mostra a lista de antecessores de um vértice\n"
+                    + "18- Verifica se o grafo é simples\n"
+                    + "19- Verifica se o grafo é conexo\n"
+                    + "20- Verifica se o grafo é completo\n"
+                    + "21- Verifica se o grafo é regular\n"
+                    + "22- Verifica se o grafo possui ciclo Euleriano\n"
+                    + "23- Verifica se o grafo possui caminho Euleriano\n"
+                    + "24- Converte para Matriz de Incidência\n"
                     //Outras opções vão aqui                    
                     + "99- Sair\n"
                     + "Digite a opção desejada:"));
@@ -738,7 +739,7 @@ public class Principal {
                 }
                 case 3: {
                     //Recupera os dados da matriz
-                    String dados = "Lista dos Vértices:" + "\n" + listarVertices(G, n);
+                    String dados = "Quantidade de Vértices:" + "\n" + quantidadeVertices(G, n);
                     //Adiciona a String em um TextArea
                     JTextArea saida = new JTextArea(dados);
                     //Exibe o TextArea com showMessageDialog
@@ -747,7 +748,7 @@ public class Principal {
                 }
                 case 4: {
                     //Recupera os dados da matriz
-                    String dados = "Lista das Arestas:" + "\n" + listarArestas(G, n);
+                    String dados = "Quantidade de Arestas:" + "\n" + quantidadeArestas(G, n);
                     //Adiciona a String em um TextArea
                     JTextArea saida = new JTextArea(dados);
                     //Exibe o TextArea com showMessageDialog
@@ -756,7 +757,7 @@ public class Principal {
                 }
                 case 5: {
                     //Recupera os dados da matriz
-                    String dados = "Lista das Arestas:" + "\n" + listarArestasPares(G, n);
+                    String dados = "Lista dos Vértices:" + "\n" + listarVertices(G, n);
                     //Adiciona a String em um TextArea
                     JTextArea saida = new JTextArea(dados);
                     //Exibe o TextArea com showMessageDialog
@@ -764,6 +765,24 @@ public class Principal {
                     break;
                 }
                 case 6: {
+                    //Recupera os dados da matriz
+                    String dados = "Lista das Arestas:" + "\n" + listarArestas(G, n);
+                    //Adiciona a String em um TextArea
+                    JTextArea saida = new JTextArea(dados);
+                    //Exibe o TextArea com showMessageDialog
+                    JOptionPane.showMessageDialog(null, saida);
+                    break;
+                }
+                case 7: {
+                    //Recupera os dados da matriz
+                    String dados = "Lista das Arestas:" + "\n" + listarArestasPares(G, n);
+                    //Adiciona a String em um TextArea
+                    JTextArea saida = new JTextArea(dados);
+                    //Exibe o TextArea com showMessageDialog
+                    JOptionPane.showMessageDialog(null, saida);
+                    break;
+                }
+                case 8: {
                     int i = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n - 1) + ") de um vértice para saber o grau de saída (do):"));
                     //Recupera os dados da matriz
                     String dados = "Grau de Saída dos Vértice : \n" + "d(" + rotuloVertice(i) + ")=" + grauSaidaVertice(G, n, i);
@@ -773,7 +792,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 7: {
+                case 9: {
                     //Recupera os dados da matriz
                     String dados = "Grau de Saída dos Vértices:" + "\n" + listarGrauSaida(G, n);
                     //Adiciona a String em um TextArea
@@ -782,7 +801,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 8: {
+                case 10: {
                     int j = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n - 1) + ") de um vértice para saber o grau de entrada (di):"));
                     //Recupera os dados da matriz
                     String dados = "Grau de Entrada dos Vértice : \n" + "d(" + rotuloVertice(j) + ")=" + grauEntradaVertice(G, n, j);
@@ -792,7 +811,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 9: {
+                case 11: {
                     //Recupera os dados da matriz
                     String dados = "Grau de Entrada dos Vértices:" + "\n" + listarGrauEntrada(G, n);
                     //Adiciona a String em um TextArea
@@ -801,7 +820,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 10: {
+                case 12: {
                     //Recupera os dados da matriz
                     String dados = "Lista dos Graus(Entrada/Saída) dos Vértices:" + "\n" + listarGrau(G, n);
                     //Adiciona a String em um TextArea
@@ -810,7 +829,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 11: {
+                case 13: {
                     int i = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n - 1) + ") do primeiro vértice:"));
                     int j = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n - 1) + ") do segundo vértice:"));
                     String dados = "Os vértices " + rotuloVertice(i) + " e " + rotuloVertice(j);
@@ -826,7 +845,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 12: {
+                case 14: {
                     int i = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n - 1) + ") de um vértice para saber as adjacências:"));
                     //Recupera os dados da matriz
                     String dados = "Os adjacentes de " + rotuloVertice(i) + " são: " + adjacentes(G, n, i);
@@ -836,7 +855,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 13: {
+                case 15: {
                     //Recupera os dados da matriz
                     String dados = "Lista das Adjacências:" + "\n" + listarAdjacentes(G, n);
                     //Adiciona a String em um TextArea
@@ -845,7 +864,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 14: {
+                case 16: {
                     int i = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n - 1) + ") de um vértice para saber os sucessores:"));
                     //Recupera os dados da matriz
                     String dados = "Os sucessores de " + rotuloVertice(i) + " são: " + sucessores(G, n, i);
@@ -855,7 +874,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 15: {
+                case 17: {
                     int i = Integer.parseInt(JOptionPane.showInputDialog("Digite o indice(0-" + (n - 1) + ") de um vértice para saber os antecessores:"));
                     //Recupera os dados da matriz
                     String dados = "Os antecessores de " + rotuloVertice(i) + " são: " + antecessores(G, n, i);
@@ -865,7 +884,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 16: {
+                case 18: {
                     String dados = "O grafo ";
                     //Recupera s dado da matriz
                     if (eSimples(G, n) == true) {
@@ -879,7 +898,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 17: {
+                case 19: {
                     String dados = "O grafo ";
                     //Recupera s dado da matriz
                     if (eConexo(G, n) == true) {
@@ -893,7 +912,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 18: {
+                case 20: {
                     String dados = "O grafo ";
                     //Recupera s dado da matriz
                     if (eCompleto(G, n) == true) {
@@ -907,7 +926,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 19: {
+                case 21: {
                     String dados = "O grafo ";
                     //Recupera s dado da matriz
                     if (eRegular(G, n) == true) {
@@ -921,7 +940,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 20: {
+                case 22: {
                     String dados = "O grafo ";
                     //Recupera s dado da matriz
                     if (possuiCicloEuleriano(G, n) == true) {
@@ -935,7 +954,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 21: {
+                case 23: {
                     String dados = "O grafo ";
                     //Recupera s dado da matriz
                     if (possuiCaminhoEuleriano(G, n) == true) {
@@ -950,7 +969,7 @@ public class Principal {
                     break;
                 }
 
-                case 22: {
+                case 24: {
                     int[][] I = converte(G, n);
                     int e = quantidadeArestas(G, n);
 
