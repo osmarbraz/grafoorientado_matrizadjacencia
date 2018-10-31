@@ -477,27 +477,7 @@ public class Principal {
         return true;
     }
 
-    /**
-     * Verifica se o grafo é conexo.
-     *
-     * Se o grau entrada e saída de um vértice for igual a 0 nenhum vértice
-     * chega ou parte dele.
-     *
-     * @param G Matriz do grafo.
-     * @param n Quantidade de vértices do grafo.
-     * @return Se o grafo é conexo.
-     */
-    public static boolean eConexo(int[][] G, int n) {
-        for (int i = 0; i < n; i++) {
-            //Verifica se o vértice i é de grau entrada igual a 0 
-            //grau de saída igual 0, nenhum vértice chega ou parte dele
-            if ((grauEntradaVertice(G, n, i) == 0) && (grauSaidaVertice(G, n, i) == 0)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
+    
     /**
      * Verifica se o grafo é completo.
      *
@@ -709,12 +689,11 @@ public class Principal {
                     + "16- Mostra a lista de sucessores de um vértice\n"
                     + "17- Mostra a lista de antecessores de um vértice\n"
                     + "18- Verifica se o grafo é simples\n"
-                    + "19- Verifica se o grafo é conexo\n"
-                    + "20- Verifica se o grafo é completo\n"
-                    + "21- Verifica se o grafo é regular\n"
-                    + "22- Verifica se o grafo possui ciclo Euleriano\n"
-                    + "23- Verifica se o grafo possui caminho Euleriano\n"
-                    + "24- Converte para Matriz de Incidência\n"
+                    + "19- Verifica se o grafo é completo\n"
+                    + "20- Verifica se o grafo é regular\n"
+                    + "21- Verifica se o grafo possui ciclo Euleriano\n"
+                    + "22- Verifica se o grafo possui caminho Euleriano\n"
+                    + "23- Converte para Matriz de Incidência\n"
                     //Outras opções vão aqui                    
                     + "99- Sair\n"
                     + "Digite a opção desejada:"));
@@ -897,22 +876,8 @@ public class Principal {
                     //Exibe o TextArea com showMessageDialog
                     JOptionPane.showMessageDialog(null, saida);
                     break;
-                }
+                }                
                 case 19: {
-                    String dados = "O grafo ";
-                    //Recupera s dado da matriz
-                    if (eConexo(G, n) == true) {
-                        dados = dados + "é conexo";
-                    } else {
-                        dados = dados + "não é conexo";
-                    }
-                    //Adiciona a String em um TextArea
-                    JTextArea saida = new JTextArea(dados);
-                    //Exibe o TextArea com showMessageDialog
-                    JOptionPane.showMessageDialog(null, saida);
-                    break;
-                }
-                case 20: {
                     String dados = "O grafo ";
                     //Recupera s dado da matriz
                     if (eCompleto(G, n) == true) {
@@ -926,7 +891,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 21: {
+                case 20: {
                     String dados = "O grafo ";
                     //Recupera s dado da matriz
                     if (eRegular(G, n) == true) {
@@ -940,7 +905,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 22: {
+                case 21: {
                     String dados = "O grafo ";
                     //Recupera s dado da matriz
                     if (possuiCicloEuleriano(G, n) == true) {
@@ -954,7 +919,7 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-                case 23: {
+                case 22: {
                     String dados = "O grafo ";
                     //Recupera s dado da matriz
                     if (possuiCaminhoEuleriano(G, n) == true) {
@@ -969,7 +934,7 @@ public class Principal {
                     break;
                 }
 
-                case 24: {
+                case 23: {
                     int[][] I = converte(G, n);
                     int e = quantidadeArestas(G, n);
 
