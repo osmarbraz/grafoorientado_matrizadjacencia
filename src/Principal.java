@@ -1,4 +1,3 @@
-
 /**
  * Implementação de exemplo que utiliza JOptionPane para construir um menu de
  * opções para um grafo orientado utilizando uma matriz de adjacência.
@@ -10,6 +9,7 @@ public class Principal {
 
     //Número de vértices do grafo
     static int n = 0;
+    
     //Matriz M de n por n
     static int[][] G = new int[n][n];
 
@@ -667,6 +667,8 @@ public class Principal {
 
         //Armazena opção lida
         int opcao = -1;
+        
+         //Laço do menu de opções
         while (opcao != 99) {
             //Realiza a leitura da opção
             opcao = Integer.parseInt(JOptionPane.showInputDialog("\t### Menu de Opções - Grafo Orientado com Matriz de Adjacência ###\n"
@@ -694,9 +696,12 @@ public class Principal {
                     + "21- Verifica se o grafo possui ciclo Euleriano\n"
                     + "22- Verifica se o grafo possui caminho Euleriano\n"
                     + "23- Converte para Matriz de Incidência\n"
-                    //Outras opções vão aqui                    
+                    
+                    //Outras opções vão aqui         
+                    
                     + "99- Sair\n"
                     + "Digite a opção desejada:"));
+            
             //Verifica a opção
             switch (opcao) {
                 case 0: {
@@ -933,7 +938,6 @@ public class Principal {
                     JOptionPane.showMessageDialog(null, saida);
                     break;
                 }
-
                 case 23: {
                     int[][] I = converte(G, n);
                     int e = quantidadeArestas(G, n);
@@ -952,12 +956,15 @@ public class Principal {
                     System.out.println("Saindo do programa!");
                     break;
                 }
+                
+                //Outras opções vão aqui
+                
                 //Opção inválida do menu
                 default: {
                     System.out.println("Opção inválida!");
                     break;
                 }
-            }//Fim Switch
-        }//Fim While
-    }//Fim Main
-}
+            }//Fim switch
+        }//Fim while
+    }//Fim main
+}//Fim Principal
