@@ -951,14 +951,13 @@ public class Principal {
                     break;
                 }
 
+                 //Outras opções vão aqui
+                
                 //Opção de saída do programa
                 case 99: {
                     System.out.println("Saindo do programa!");
                     break;
-                }
-                
-                //Outras opções vão aqui
-                
+                }                
                 //Opção inválida do menu
                 default: {
                     System.out.println("Opção inválida!");
